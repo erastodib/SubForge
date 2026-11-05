@@ -14,12 +14,15 @@ Em vez de traduzir cada linha isoladamente, o SubForge envia grupos de legendas 
 
 O projeto utiliza o [Ollama](https://ollama.com/) para executar localmente o modelo [TranslateGemma 12B](https://ollama.com/library/translategemma), sem depender de APIs pagas ou serviços externos de tradução.
 
+O SubForge foi desenvolvido para funcionar com diferentes filmes, séries e conteúdos legendados. Os idiomas de origem e destino podem ser configurados diretamente no script.
+
 ## Funcionalidades
 
 - **Tradução contextual:** processa várias legendas em conjunto para preservar o contexto dos diálogos.
+- **Idiomas configuráveis:** permite definir os idiomas de origem e destino.
 - **Execução local:** utiliza o Ollama para executar o modelo de IA na própria máquina.
 - **Preservação da sincronização:** mantém os índices e timestamps originais do arquivo SRT.
-- **Formatação preservada:** busca manter tags de formatação, como `<i>` e `</i>`.
+- **Preservação da formatação:** busca manter tags de formatação, como `<i>` e `</i>`.
 - **Processamento em lotes:** divide a legenda em grupos menores para facilitar a tradução.
 - **Contexto entre lotes:** utiliza falas anteriores como referência para melhorar a continuidade.
 - **Checkpoint e retomada:** salva o progresso e permite continuar uma tradução interrompida.
@@ -91,7 +94,7 @@ ollama run translategemma:12b
 
 ```bash
 git clone https://github.com/erastodib/SubForge.git
-cd subforge
+cd SubForge
 ```
 
 ### 4. Crie um ambiente virtual
@@ -115,7 +118,7 @@ Com o ambiente virtual ativado, execute:
 pip install -r requirements.txt
 ```
 
-O arquivo `requirements.txt` contém as dependências Python necessárias para executar o projeto:
+O arquivo `requirements.txt` contém as dependências Python necessárias:
 
 ```text
 pysrt
@@ -134,6 +137,9 @@ Exemplo:
 ```python
 MODEL = "translategemma:12b"
 
+SOURCE_LANGUAGE = "English"
+TARGET_LANGUAGE = "Brazilian Portuguese"
+
 INPUT_FILE = "legenda_original.srt"
 OUTPUT_FILE = "legenda_traduzida.srt"
 
@@ -147,12 +153,25 @@ MAX_RETRIES = 3
 | Parâmetro | Descrição |
 |---|---|
 | `MODEL` | Modelo utilizado pelo Ollama |
+| `SOURCE_LANGUAGE` | Idioma das legendas de entrada |
+| `TARGET_LANGUAGE` | Idioma desejado para a tradução |
 | `INPUT_FILE` | Caminho do arquivo SRT original |
 | `OUTPUT_FILE` | Caminho da legenda traduzida |
 | `CHECKPOINT_FILE` | Arquivo utilizado para salvar o progresso |
 | `BATCH_SIZE` | Quantidade de legendas por lote |
 | `CONTEXT_SIZE` | Quantidade de legendas anteriores utilizadas como contexto |
 | `MAX_RETRIES` | Número máximo de tentativas em caso de falha |
+
+Os idiomas podem ser alterados conforme a necessidade. Por exemplo:
+
+```python
+SOURCE_LANGUAGE = "Italian"
+TARGET_LANGUAGE = "English"
+```
+
+Nesse caso, o programa tentará traduzir diretamente legendas em italiano para inglês.
+
+> **Importante:** `SOURCE_LANGUAGE` deve corresponder ao idioma real do arquivo SRT de entrada. O idioma original do filme não é necessariamente o idioma das legendas utilizadas como entrada.
 
 O script utiliza a API local do Ollama, normalmente disponível em:
 
@@ -203,9 +222,12 @@ Instead of translating each subtitle independently, SubForge processes groups of
 
 The project uses [Ollama](https://ollama.com/) to run [TranslateGemma 12B](https://ollama.com/library/translategemma) locally, without relying on paid APIs or external translation services.
 
+SubForge is designed to work with different movies, TV shows, and subtitled content. Source and target languages can be configured directly in the script.
+
 ## Features
 
 - **Context-aware translation:** processes multiple subtitles together to preserve dialogue context.
+- **Configurable languages:** allows users to define source and target languages.
 - **Local execution:** runs the AI model directly on the user's machine through Ollama.
 - **Timestamp preservation:** retains the original SRT indices and timestamps.
 - **Formatting preservation:** attempts to preserve formatting tags such as `<i>` and `</i>`.
@@ -280,7 +302,7 @@ ollama run translategemma:12b
 
 ```bash
 git clone https://github.com/erastodib/SubForge.git
-cd subforge
+cd SubForge
 ```
 
 ### 4. Create a virtual environment
@@ -323,6 +345,9 @@ Example:
 ```python
 MODEL = "translategemma:12b"
 
+SOURCE_LANGUAGE = "English"
+TARGET_LANGUAGE = "Brazilian Portuguese"
+
 INPUT_FILE = "original_subtitles.srt"
 OUTPUT_FILE = "translated_subtitles.srt"
 
@@ -336,12 +361,25 @@ MAX_RETRIES = 3
 | Parameter | Description |
 |---|---|
 | `MODEL` | Ollama model used for translation |
+| `SOURCE_LANGUAGE` | Language of the input subtitles |
+| `TARGET_LANGUAGE` | Desired translation language |
 | `INPUT_FILE` | Path to the original SRT file |
 | `OUTPUT_FILE` | Path to the translated subtitle file |
 | `CHECKPOINT_FILE` | File used to save translation progress |
 | `BATCH_SIZE` | Number of subtitles per batch |
 | `CONTEXT_SIZE` | Number of previous subtitles used as context |
 | `MAX_RETRIES` | Maximum number of retry attempts after a failure |
+
+Languages can be changed as needed. For example:
+
+```python
+SOURCE_LANGUAGE = "Italian"
+TARGET_LANGUAGE = "English"
+```
+
+In this case, the program will attempt to translate Italian subtitles directly into English.
+
+> **Important:** `SOURCE_LANGUAGE` must match the actual language of the input SRT file. The original language of the movie is not necessarily the language of the subtitles being translated.
 
 The script communicates with Ollama through its local API, usually available at:
 

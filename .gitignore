@@ -1,0 +1,30 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE and editor settings
+.vscode/
+.idea/
+
+# Translation checkpoints
+translation_checkpoint.json
+
+# Generated subtitle files
+*.pt.srt
+*_translated.srt
+
+# Media files
+*.mp4
+*.mkv
+*.avi
+*.mov
+
+# Operating system files
+.DS_Store
+Thumbs.db
