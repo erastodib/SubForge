@@ -1,6 +1,12 @@
-## 🇧🇷 Português
+# SubForge
 
-### Sobre o projeto
+**Local AI-powered subtitle translation with Ollama and TranslateGemma. Generate natural, context-aware subtitles while preserving timestamps — no external translation services required.**
+
+---
+
+# 🇧🇷 Português
+
+## Sobre o projeto
 
 **SubForge** é uma ferramenta de tradução de legendas que utiliza modelos de inteligência artificial executados localmente para traduzir arquivos `.srt` de maneira contextualizada.
 
@@ -8,7 +14,7 @@ Em vez de traduzir cada linha isoladamente, o SubForge envia grupos de legendas 
 
 O projeto utiliza o [Ollama](https://ollama.com/) para executar localmente o modelo [TranslateGemma 12B](https://ollama.com/library/translategemma), sem depender de APIs pagas ou serviços externos de tradução.
 
-### Funcionalidades
+## Funcionalidades
 
 - **Tradução contextual:** processa várias legendas em conjunto para preservar o contexto dos diálogos.
 - **Execução local:** utiliza o Ollama para executar o modelo de IA na própria máquina.
@@ -19,7 +25,7 @@ O projeto utiliza o [Ollama](https://ollama.com/) para executar localmente o mod
 - **Checkpoint e retomada:** salva o progresso e permite continuar uma tradução interrompida.
 - **Validação automática:** verifica a estrutura das respostas antes de salvar os resultados.
 
-### Tecnologias utilizadas
+## Tecnologias utilizadas
 
 | Tecnologia | Finalidade |
 |---|---|
@@ -31,7 +37,7 @@ O projeto utiliza o [Ollama](https://ollama.com/) para executar localmente o mod
 | tqdm | Barra de progresso |
 | FFmpeg | Incorporação das legendas ao vídeo |
 
-### Como funciona
+## Como funciona
 
 O fluxo de tradução pode ser dividido em cinco etapas:
 
@@ -43,7 +49,7 @@ O fluxo de tradução pode ser dividido em cinco etapas:
 
 As legendas anteriores utilizadas como contexto não são traduzidas novamente. Elas servem apenas como referência para manter a coerência entre os lotes.
 
-### Requisitos
+## Requisitos
 
 - Linux, Windows ou macOS.
 - Python 3.10 ou superior.
@@ -53,9 +59,9 @@ As legendas anteriores utilizadas como contexto não são traduzidas novamente. 
 
 > **Observação:** o desempenho e o consumo de memória dependem do hardware disponível. O modelo pode utilizar CPU e GPU conforme a configuração do Ollama.
 
-### Instalação
+## Instalação
 
-#### 1. Instale o Ollama
+### 1. Instale o Ollama
 
 No Linux:
 
@@ -69,7 +75,7 @@ Inicie o serviço:
 sudo systemctl enable --now ollama
 ```
 
-#### 2. Baixe o modelo
+### 2. Baixe o modelo
 
 ```bash
 ollama pull translategemma:12b
@@ -81,14 +87,14 @@ Para verificar se o modelo está funcionando:
 ollama run translategemma:12b
 ```
 
-#### 3. Clone o repositório
+### 3. Clone o repositório
 
 ```bash
-git clone https://github.com/erastodib/subforge.git
+git clone https://github.com/erastodib/SubForge.git
 cd subforge
 ```
 
-#### 4. Crie um ambiente virtual
+### 4. Crie um ambiente virtual
 
 ```bash
 python -m venv .venv
@@ -101,13 +107,25 @@ No Windows:
 .venv\Scripts\activate
 ```
 
-#### 5. Instale as dependências
+### 5. Instale as dependências
+
+Com o ambiente virtual ativado, execute:
 
 ```bash
-pip install pysrt requests tqdm
+pip install -r requirements.txt
 ```
 
-### Configuração
+O arquivo `requirements.txt` contém as dependências Python necessárias para executar o projeto:
+
+```text
+pysrt
+requests
+tqdm
+```
+
+O Ollama e o FFmpeg são ferramentas externas e devem ser instalados separadamente. Eles não fazem parte das dependências Python do projeto.
+
+## Configuração
 
 Antes de executar o programa, configure os parâmetros no início do script `translate_srt_ollama.py`.
 
@@ -142,9 +160,9 @@ O script utiliza a API local do Ollama, normalmente disponível em:
 http://localhost:11434/api/generate
 ```
 
-### Executando
+## Executando
 
-Com o Ollama em execução e o modelo baixado:
+Com o ambiente virtual ativado, o Ollama em execução e o modelo baixado:
 
 ```bash
 python translate_srt_ollama.py
@@ -156,7 +174,7 @@ Se o processamento for interrompido, execute o script novamente para continuar u
 
 > Caso altere o arquivo de entrada ou os parâmetros da tradução, remova o checkpoint antigo para evitar reutilizar resultados de uma execução anterior.
 
-### Incorporando as legendas ao vídeo
+## Incorporando as legendas ao vídeo
 
 O SubForge gera um arquivo SRT independente. Para incorporar permanentemente as legendas ao vídeo (*hard subtitles*), utilize o FFmpeg:
 
@@ -169,16 +187,15 @@ filme_legendado.mp4
 
 Esse processo renderiza as legendas diretamente nos quadros do vídeo. O áudio é copiado sem recodificação.
 
-### Privacidade e execução local
+## Privacidade e execução local
 
 Toda a tradução é realizada localmente por meio do Ollama. O conteúdo das legendas é enviado apenas ao serviço local do modelo, sem necessidade de utilizar APIs externas de tradução.
 
 O download inicial do modelo exige conexão com a internet, mas a tradução pode ser executada posteriormente sem conexão, desde que o modelo já esteja disponível na máquina.
 
+# 🇺🇸 English
 
-## 🇺🇸 English
-
-### About
+## About
 
 **SubForge** is a subtitle translation tool that uses locally running artificial intelligence models to translate `.srt` files with contextual awareness.
 
@@ -186,7 +203,7 @@ Instead of translating each subtitle independently, SubForge processes groups of
 
 The project uses [Ollama](https://ollama.com/) to run [TranslateGemma 12B](https://ollama.com/library/translategemma) locally, without relying on paid APIs or external translation services.
 
-### Features
+## Features
 
 - **Context-aware translation:** processes multiple subtitles together to preserve dialogue context.
 - **Local execution:** runs the AI model directly on the user's machine through Ollama.
@@ -197,7 +214,7 @@ The project uses [Ollama](https://ollama.com/) to run [TranslateGemma 12B](https
 - **Checkpoint and recovery:** saves progress and allows interrupted translations to resume.
 - **Automatic validation:** checks the structure of model responses before saving the results.
 
-### Technologies
+## Technologies
 
 | Technology | Purpose |
 |---|---|
@@ -209,7 +226,7 @@ The project uses [Ollama](https://ollama.com/) to run [TranslateGemma 12B](https
 | tqdm | Progress bar |
 | FFmpeg | Hardcoding subtitles into video |
 
-### How it works
+## How it works
 
 The translation workflow consists of five main steps:
 
@@ -221,7 +238,7 @@ The translation workflow consists of five main steps:
 
 Previous subtitles used as context are not translated again. They are only provided as references to maintain consistency between batches.
 
-### Requirements
+## Requirements
 
 - Linux, Windows, or macOS.
 - Python 3.10 or newer.
@@ -231,9 +248,9 @@ Previous subtitles used as context are not translated again. They are only provi
 
 > **Note:** performance and memory usage depend on the available hardware. The model can use CPU and GPU resources according to the Ollama configuration.
 
-### Installation
+## Installation
 
-#### 1. Install Ollama
+### 1. Install Ollama
 
 On Linux:
 
@@ -247,7 +264,7 @@ Start the service:
 sudo systemctl enable --now ollama
 ```
 
-#### 2. Download the model
+### 2. Download the model
 
 ```bash
 ollama pull translategemma:12b
@@ -259,14 +276,14 @@ To verify that the model is working:
 ollama run translategemma:12b
 ```
 
-#### 3. Clone the repository
+### 3. Clone the repository
 
 ```bash
-git clone https://github.com/erastodib/subforge.git
+git clone https://github.com/erastodib/SubForge.git
 cd subforge
 ```
 
-#### 4. Create a virtual environment
+### 4. Create a virtual environment
 
 ```bash
 python -m venv .venv
@@ -279,13 +296,25 @@ On Windows:
 .venv\Scripts\activate
 ```
 
-#### 5. Install dependencies
+### 5. Install dependencies
+
+With the virtual environment activated, run:
 
 ```bash
-pip install pysrt requests tqdm
+pip install -r requirements.txt
 ```
 
-### Configuration
+The `requirements.txt` file contains the Python dependencies required by the project:
+
+```text
+pysrt
+requests
+tqdm
+```
+
+Ollama and FFmpeg are external tools and must be installed separately. They are not included in the project's Python dependencies.
+
+## Configuration
 
 Before running the program, configure the parameters at the beginning of `translate_srt_ollama.py`.
 
@@ -320,9 +349,9 @@ The script communicates with Ollama through its local API, usually available at:
 http://localhost:11434/api/generate
 ```
 
-### Running
+## Running
 
-With Ollama running and the model downloaded:
+With the virtual environment activated, Ollama running, and the model downloaded:
 
 ```bash
 python translate_srt_ollama.py
@@ -334,7 +363,7 @@ If the process is interrupted, run the script again to resume using the existing
 
 > If you change the input file or translation parameters, delete the previous checkpoint to avoid reusing results from an earlier run.
 
-### Embedding subtitles into a video
+## Embedding subtitles into a video
 
 SubForge generates a standalone SRT file. To permanently embed subtitles into a video (*hard subtitles*), use FFmpeg:
 
@@ -347,7 +376,7 @@ subtitled_movie.mp4
 
 This process renders the subtitles directly into the video frames. The audio stream is copied without re-encoding.
 
-### Privacy and local execution
+## Privacy and local execution
 
 All translation is performed locally through Ollama. Subtitle content is sent only to the local model service, with no need for external translation APIs.
 
